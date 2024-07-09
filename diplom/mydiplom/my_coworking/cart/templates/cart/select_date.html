@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Продукты</h1>
+
+  <form method="post" action="{% url 'cart:add_to_cart' %}">
+    {% csrf_token %}
+
+    {% for product in products %}
+      <div>
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <p>Цена: ${{ product.price }}</p>
+
+        <label for="quantity_{{ product.id }}">Количество:</label>
+        <input type="number" id="quantity_{{ product.id }}" name="quantity_{{ product.id }}" min="1" value="1">
+
+        <label for="order_day_{{ product.id }}">Дата:</label>
+        <input type="date" id="order_day_{{ product.id }}" name="order_day_{{ product.id }}" value="{{ product.order_day|date:'Y-m-d' }}">
+
+        <label for="order_time_{{ product.id }}">Время:</label>
+        <input type="time" id="order_time_{{ product.id }}" name="order_time_{{ product.id }}" value="{{ product.order_time|time:'H:i' }}">
+
+        <a type="submit" href="{% url 'cart:add_to_cart' product.id %}" name="product_id"  class="buy-now-button">Добавить в корзину</a>
+      </div>
+    {% endfor %}
+  </form>
+{% endblock %}
+
+
+{% block content %}
+<h1>Заказ аренды</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="order_day">Дата заказа:</label>
+        <input type="date" class="form-control" id="order_day" name="order_day" value="{{ cart_item.order_day|date:'Y-m-d' }}">
+    </div>
+    <div class="form-group">
+        <label for="order_time">Время заказа:</label>
+        <input type="time" class="form-control" id="order_time" name="order_time" value="{{ cart_item.order_time|time:'H:i' }}">
+    </div>
+    <a type="submit" href="{% url 'cart:add_to_cart' product.id %}" name="product_id"  class="buy-now-button">Добавить в корзину</a>
+</form>
+{% endblock %}
+
+
+<!--{% block content %}-->
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+
+<!--    <title>Выбор даты и времени</title>-->
+
+<!--    	<style>-->
+<!--		/* Add CSS styles for flex container and items */-->
+<!--		.product-list {-->
+<!--			display: flex;-->
+<!--			flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */-->
+<!--			justify-content: space-between; /* Space items evenly along the main axis */-->
+<!--			list-style: none; /* Remove list styles */-->
+<!--			padding: 0;-->
+<!--		}-->
+
+<!--		.product-item {-->
+<!--			flex: 1; /* Grow to fill available space evenly */-->
+<!--			max-width: 30%; /* Limit item width to avoid overcrowding */-->
+<!--			margin: 10px; /* Add spacing between items */-->
+<!--			border: 1px solid #ccc; /* Add a border for visual separation */-->
+<!--			padding: 10px;-->
+<!--			text-align: center;-->
+<!--		}-->
+
+<!--		/* Style the "Buy Now" button */-->
+<!--		.buy-now-button {-->
+<!--			display: block;-->
+<!--			margin-top: 10px;-->
+<!--			background-color: #007bff;-->
+<!--			color: #fff;-->
+<!--			text-decoration: none;-->
+<!--			padding: 5px 10px;-->
+<!--			border-radius: 5px;-->
+<!--		}-->
+<!--	</style>-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--	<h1>Product Catalog</h1>-->
+
+<!--    <label for="product">Имя товара:</label>-->
+<!--    <input type="text" id="product" name="product" required>-->
+
+<!--    <label for="start_date">Начало аренды:</label>-->
+<!--    <input type="date" id="start_date" name="start_date" required>-->
+
+<!--    <label for="end_date">Конец аренды:</label>-->
+<!--    <input type="date" id="end_date" name="end_date" required>-->
+
+<!--    {% if products %}-->
+
+<!--	<ul class="product-list">-->
+<!--		{% for product in products %}-->
+<!--			<li class="product-item">-->
+<!--				<img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">-->
+<!--				<h2>{{ product.name }}</h2>-->
+<!--				<p>{{ product.quantity }}</p>-->
+<!--				<p>{{ product.description }}</p>-->
+<!--				<p>Price: ${{ product.price }}</p>-->
+<!--                Доступно с {{ product.order_day }} по-->
+<!--                {{ product.order_time }}-->
+<!--            </li>-->
+<!--    </ul>-->
+<!--    {% endif %}-->
+
+<!--<section>-->
+<!--    <div class="container class_form">-->
+<!--        <h1 class="text-3">Оставь заявку на аренду</h1>-->
+
+<!--        <h3>{{ step }}</h3>-->
+
+<!--        <div class="row justify-content-center">-->
+<!--            {% csrf_token %}-->
+<!--            {% if step_1 %}-->
+<!--            <form action="{% url 'main' %}" method="GET" style="width: 50%;">-->
+
+<!--                <label for="start">Выберите дату:</label>-->
+<!--                  <input type="date" id="start" name="date"-->
+<!--                       value="{{min_day_value}}"-->
+<!--                       min="{{min_day_value}}" max="2024-12-01">-->
+
+<!--                <div style="float: right;" class="form-group row">-->
+<!--                    <button type="submit" class="btn btn-success">Далее</button>-->
+<!--                </div>-->
+
+<!--            </form>-->
+<!--            {% endif %}-->
+
+<!--            {% if step_2 %}-->
+<!--            <form action="{% url 'cart:add_to_cart'  product.id %}" method="GET" style="width: 50%;">-->
+<!--                {% csrf_token %}-->
+<!--                <label for="start">Выберите доступное время:</label>-->
+<!--                    <select id="select" name="time" class="form-select form-select-lg mb-3" aria-label=".form-group row">-->
+<!--                        {% for time in all_time %}-->
+<!--                        <option value="{{ time }}">{{ time }}</option>-->
+<!--                        {% endfor %}-->
+<!--                    </select>-->
+<!--                                <div class="form-group row">-->
+<!--&lt;!&ndash;                    <label for="inputEmail3" class="col-sm-2 col-form-label">Имя</label><br>&ndash;&gt;-->
+<!--                    <label class="col-sm-2 col-form-label">Имя</label><br>-->
+<!--                    <input type="text" value="" name="name" class="form-control">-->
+<!--                    <div class="">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="form-group row">-->
+<!--&lt;!&ndash;                    <label for="inputEmail3" class="col-sm-2 col-form-label">Телефон</label><br>&ndash;&gt;-->
+<!--                    <label class="col-sm-2 col-form-label">Телефон</label><br>-->
+<!--                    <input type="text" value="" name="name" class="form-control">-->
+<!--                    <div class="">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--            {% endif %}-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--{% endfor %}-->
+<!--{% endblock %}-->
+
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
+
+<!--</body>-->
+<!--</html>-->

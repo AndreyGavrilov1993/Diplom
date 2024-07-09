@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Product Catalog</title>
+	<style>
+		/* Add CSS styles for flex container and items */
+		.product-list {
+			display: flex;
+			flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */
+			justify-content: space-between; /* Space items evenly along the main axis */
+			list-style: none; /* Remove list styles */
+			padding: 0;
+		}
+
+		.product-item {
+			flex: 1; /* Grow to fill available space evenly */
+			max-width: 30%; /* Limit item width to avoid overcrowding */
+			margin: 10px; /* Add spacing between items */
+			border: 1px solid #ccc; /* Add a border for visual separation */
+			padding: 10px;
+			text-align: center;
+		}
+
+		/* Style the "Buy Now" button */
+		.buy-now-button {
+			display: block;
+			margin-top: 10px;
+			background-color: #007bff;
+			color: #fff;
+			text-decoration: none;
+			padding: 5px 10px;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Product Catalog</h1>
+
+	<ul class="product-list">
+		{% for product in products %}
+			<li class="product-item">
+				<img src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
+				<h2>{{ product.name }}</h2>
+				<p>{{ product.quantity }}</p>
+				<p>{{ product.description }}</p>
+				<p>Price: ${{ product.price }}</p>
+
+<form method="post">
+    {% csrf_token %}
+				<div class="form-group">
+        <label for="order_day">Дата заказа:</label>
+        <input type="date" class="form-control" id="order_day" name="order_day" value="{{ cart_item.order_day|date:'Y-m-d' }}">
+    </div>
+    <div class="form-group">
+        <label for="order_time">Время заказа:</label>
+        <input type="time" class="form-control" id="order_time" name="order_time" value="{{ cart_item.order_time|time:'H:i' }}">
+    </div>
+                <a href="{% url 'cart:add_to_cart'  product.id %}" class="buy-now-button">Buy at selected time</a>
+</form>
+				<a href="{% url 'cart:add_to_cart'  product.id %}" class="buy-now-button">Buy Now</a>
+				<a class="buy-now-button" href="{% url 'cart:add_to_cart' product.id %}">Add to Cart</a>
+			</li>
+
+		{% endfor %}
+		            <div>
+                    <h3>{{ step }}</h3>
+						{% if step_1 %}
+						<form action="{% url 'main' %}" method="GET" style="width: 50%;">
+
+							<label for="start">Выберите дату:</label>
+							  <input type="date" id="start" name="date"
+								   value="{{min_day_value}}"
+								   min="{{min_day_value}}" max="2024-12-01">
+
+								<a href="{% url 'cart:add_to_cart'  product.id %}" class="buy-now-button">Buy Now for an second</a>
+
+						</form>
+						{% endif %}
+                    </div>
+	</ul>
+<form action="{% url 'cart:product_list' %}" class="form-inline" method="get">
+
+<button type="submit" class="btn btn-primary btn-lg mb-2">Назад</button>
+
+</form>
+</body>
+</html>

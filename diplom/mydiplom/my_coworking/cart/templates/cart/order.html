@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Заказ аренды</h1>
+
+
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="order_day">Дата заказа:</label>
+        <input type="date" class="form-control" id="order_day" name="order_day" value="{{ cart_item.order_day|date:'Y-m-d' }}">
+    </div>
+    <div class="form-group">
+        <label for="order_time">Время заказа:</label>
+        <input type="time" class="form-control" id="order_time" name="order_time" value="{{ cart_item.order_time|time:'H:i' }}">
+    </div><a href="index/">
+    <button type="submit" class="btn btn-primary">Оформить заказ</button>
+    </a>
+</form>
+{% endblock %}

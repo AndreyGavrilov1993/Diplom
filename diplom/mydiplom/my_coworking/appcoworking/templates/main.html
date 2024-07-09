@@ -1,0 +1,284 @@
+<!--{% extends "master.html" %}-->
+
+<!--{% block title %}-->
+<!--{% endblock %}-->
+
+
+<!--{% block content %}-->
+
+ {% load static %}
+<!--<!DOCTYPE html>-->
+<html lang="ru">
+	<head>
+		<!-- encoding -->
+		<meta charset="UTF-8" />
+		<!-- Mobile support -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Title and SEO -->
+		<title>Коворкинг</title>
+		<meta name="description" content="Описание страницы" />
+		<meta name="keywords" content="ключевые слова, фразы" />
+
+		<!-- Styles -->
+		<link href="{% static 'css/reset.css' %}" rel="stylesheet">
+		<link href="{% static 'css/base.css' %}" rel="stylesheet">
+		<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+
+		<link rel="stylesheet" href="./css/reset.css" />
+		<link rel="stylesheet" href="./css/base.css" />
+		<link rel="stylesheet" href="./css/style.css" />
+
+		<!-- Web fonts -->
+	    <link href="{% static 'css/fonts/sofia-pro/stylesheet.css' %}" rel="stylesheet">
+		<link href="{% static 'css/fonts/circular/stylesheet.css' %}" rel="stylesheet">
+
+
+		<link rel="stylesheet" href="./css/fonts/sofia-pro/stylesheet.css" />
+		<link rel="stylesheet" href="./css/fonts/circular/stylesheet.css" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Коворкинг" />
+		<meta property="og:description" content="Сдача в аренду офисов" />
+		<meta property="og:image" content="./img/opengraph.jpg" />
+
+		<!-- Favicons -->
+		<link href="{% static 'img/favicon/apple-touch-icon.png' %}"  rel="apple-touch-icon" sizes="180x180" >
+        <link href="{% static 'img/favicon/favicon-32x32.png' %}" rel="icon" type="image/png" sizes="32x32" />
+		<link href="{% static 'img/favicon/favicon-16x16.png' %}" rel="icon" type="image/png" sizes="16x16" />
+		<link href="{% static 'img/favicon/site.webmanifest' %}" rel="manifest" />
+		<link href="{% static 'img/favicon/safari-pinned-tab.svg' %}" rel="mask-icon" color="#1a60cf" />
+		<link href="{% static 'img/favicon/favicon.ico' %}" rel="shortcut icon"/>
+		<meta name="msapplication-config" content="{% static 'img/favicon/browserconfig.xml' %}" />
+
+
+		<link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png" />
+		<link rel="manifest" href="./img/favicon/site.webmanifest" />
+		<link rel="mask-icon" href="./img/favicon/safari-pinned-tab.svg" color="#1a60cf" />
+		<link rel="shortcut icon" href="./img/favicon/favicon.ico" />
+		<meta name="msapplication-TileColor" content="#00aba9" />
+		<meta name="msapplication-config" content="./img/favicon/browserconfig.xml" />
+		<meta name="theme-color" content="#ffffff" />
+	</head>
+	<body>
+		<div class="sidebar">
+			<div class="sidebar-logo">
+				<div class="logo">
+					<img src="{% static 'img/icon/coworking_1.svg' %}" alt="" />
+				</div>
+			</div>
+
+			<nav class="sidebar-nav nav">
+				<h2 class="nav-title">Исследуй</h2>
+				<ul class="nav-list">
+					<li>
+						<a href="index/"><img src="{% static 'img/icon/work-places.png' %}" alt="Work places" />Рабочие места</a>
+					</li>
+					<li>
+						<a href="index/"
+							><img src="{% static 'img/icon/free-office.png' %}" alt="Mini office" />Мини офисы</a
+						>
+					</li>
+					<li>
+						<a href="index/"><img src="{% static 'img/icon/conference-room.png' %}" alt="Conference hall" />Конференц зал</a>
+					</li>
+					<li>
+						<a href="index/"
+							><img src="{% static 'img/icon/negotations.png' %}" alt="Negotations" />Переговорные</a
+						>
+					</li>
+                    <li>
+						<a href="index/"
+							><img src="{% static 'img/icon/rent-computers.png' %}" alt="Rent computers" />Аренда компьютеров</a
+						>
+					</li>
+                    <li>
+						<a href="index/"
+							><img src="{% static 'img/icon/printer.png' %}" alt="Printer" />Печать</a
+						>
+					</li>
+					<li>
+						<a href="admin/"
+							><img
+								src="{% static 'img/icon/admin2.png' %}"
+								alt="Administrator"
+							/>Администратор</a
+						>
+					</li>
+				</ul>
+			</nav>
+
+			<div class="sidebar-help">
+
+              <p>Check out all our <a href="appcoworking/">users</a></p>
+
+				<a class="help" href="thank-you/">
+					<img class="help-icon" src="{% static 'img/icons/help.svg' %}" alt="" />
+					Help Center
+				</a>
+				<div id="content">
+				{% block contenth %}{% endblock %}
+				</div>
+			</div>
+		</div>
+
+		<main class="main">
+			<header class="header">
+
+				<!-- header-search -->
+				<div class="header-search">
+					<form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search" method="get" action="{% url 'cart:search_results' %}">
+						<label class="search-label">
+							<a href="search_results/"><img class="search-icon" src="{% static 'img/icons/search.svg' %}" alt="Search" /></a>
+							<input type="text" class="form-control" placeholder="Search by product" aria-label="Search" name='q' autocomplete="off" id="search">
+							<input type="hidden" name="search_by" value="name">
+						</label>
+					</form>
+				</div>
+				<!-- // header-search  -->
+
+				<!-- header-links -->
+				<div class="header-links">
+					<nav class="nav-header">
+						<ul class="nav-header-list">
+							<li class="nav-header-link-text active"><a href="index/">products</a></li>
+							<li class="nav-header-link-text"><a href="index/">story</a></li>
+							<li class="nav-header-link-text"><a href="cart/">order</a></li>
+							<li class="nav-header-link-icon">
+								<a href="cart/"><img src="{% static 'img/icons/basket.svg' %}" alt="Cart" /></a>
+							</li>
+							<li class="nav-header-link-icon">
+								<a href="login/"><img src="{% static 'img/icons/person.svg' %}" alt="User" /></a>
+								<p>Привет, {{ request.user }} {{ user.first_name }} {{ user.last_name }}!</p>
+								{% if request.user.is_authenticated %}
+
+								<h3>Привет, {{ request.user }} {{ user.first_name }} {{ user.last_name }}!</h3>
+								<a class="navbar-brand" href="{% url 'logout' %}">Выйти</a>
+								{% endif %}
+
+								<a class="navbar-brand" href="registration/">Регистрация</a>
+
+							</li>
+						</ul>
+					</nav>
+				</div>
+				<!-- // header-links -->
+
+			</header>
+
+			<div class="cards-wrapper">
+				<!-- row -->
+				<div class="cards-wrapper-row">
+					<!-- col -->
+					<div class="cards-wrapper-col col-vertical">
+						<a href="index/" class="card card-horizontal card-sale"><img src="{% static 'img/printer.jpg' %}" alt="">
+
+						</a>
+
+						<a href="index/" class="card card-horizontal card-sale"><img src="{% static 'img/computer.jpg' %}" alt="">
+
+						</a>
+					</div>
+					<!-- // col -->
+					<!-- col -->
+					<div class="cards-wrapper-col col-horizontal">
+
+						<div class="card card-vertical card-product">
+							<button class="card-product-fav-btn">
+
+								<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.85293 2.23726L8.42959 1.64303C9.74052 0.290397 11.8283 0.101266 13.2084 1.27703C14.824 2.65601 14.9109 5.13801 13.4608 6.63449L7.79659 12.4831C7.62714 12.658 7.35815 12.658 7.18871 12.4831L1.5246 6.63459C0.0772874 5.1381 0.164165 2.65614 1.77968 1.27715C3.15989 0.101085 5.25089 0.291 6.55863 1.64303L7.13529 2.23726L7.49411 2.607L7.85293 2.23726Z"/>
+								</svg>
+
+							</button>
+							<a class="card-product-link" href="index/">
+								<img class="card-product-img" src="{% static 'img/conference.jpg' %}" alt="Product">
+							</a>
+						</div>
+
+						<div class="card card-vertical card-product">
+							<button class="card-product-fav-btn">
+
+								<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.85293 2.23726L8.42959 1.64303C9.74052 0.290397 11.8283 0.101266 13.2084 1.27703C14.824 2.65601 14.9109 5.13801 13.4608 6.63449L7.79659 12.4831C7.62714 12.658 7.35815 12.658 7.18871 12.4831L1.5246 6.63459C0.0772874 5.1381 0.164165 2.65614 1.77968 1.27715C3.15989 0.101085 5.25089 0.291 6.55863 1.64303L7.13529 2.23726L7.49411 2.607L7.85293 2.23726Z"/>
+								</svg>
+
+							</button>
+							<a class="card-product-link" href="index/">
+								<img class="card-product-img" src="{% static 'img/mini-office.jpg' %}" alt="Product">
+							</a>
+						</div>
+
+					</div>
+					<!-- // col -->
+				</div>
+				<!-- // row -->
+				<!-- row -->
+				<div class="cards-wrapper-row">
+					<!-- col -->
+					<div class="cards-wrapper-col col-horizontal">
+
+
+						<div class="card card-vertical card-product">
+							<button class="card-product-fav-btn">
+
+								<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.85293 2.23726L8.42959 1.64303C9.74052 0.290397 11.8283 0.101266 13.2084 1.27703C14.824 2.65601 14.9109 5.13801 13.4608 6.63449L7.79659 12.4831C7.62714 12.658 7.35815 12.658 7.18871 12.4831L1.5246 6.63459C0.0772874 5.1381 0.164165 2.65614 1.77968 1.27715C3.15989 0.101085 5.25089 0.291 6.55863 1.64303L7.13529 2.23726L7.49411 2.607L7.85293 2.23726Z"/>
+								</svg>
+
+							</button>
+							<a class="card-product-link" href="index/">
+								<img class="card-product-img" src="{% static 'img/cow-working.jpg' %}" alt="Product">
+							</a>
+						</div>
+
+						<div class="card card-vertical card-product">
+							<button class="card-product-fav-btn">
+
+								<svg width="15" height="14" viewBox="0 0 15 14" xmlns="http://www.w3.org/2000/svg">
+									<path d="M7.85293 2.23726L8.42959 1.64303C9.74052 0.290397 11.8283 0.101266 13.2084 1.27703C14.824 2.65601 14.9109 5.13801 13.4608 6.63449L7.79659 12.4831C7.62714 12.658 7.35815 12.658 7.18871 12.4831L1.5246 6.63459C0.0772874 5.1381 0.164165 2.65614 1.77968 1.27715C3.15989 0.101085 5.25089 0.291 6.55863 1.64303L7.13529 2.23726L7.49411 2.607L7.85293 2.23726Z"/>
+								</svg>
+
+							</button>
+							<a class="card-product-link" href="index/">
+								<img class="card-product-img" src="{% static 'img/negotations.jpg' %}" alt="Product">
+							</a>
+						</div>
+					</div>
+					<!-- // col -->
+					<!-- col -->
+					<div class="cards-wrapper-col col-vertical">
+
+						<a href="index/" class="card card-horizontal card-section" style="background-image: url('./../img/work-places.jpg');">
+							<h4 class="card-section-title">Trending & Hot</h4>
+							<p class="card-section-desc">A collection of most trending items.</p>
+						</a>
+
+						<a href="index/" class="card card-horizontal card-section card-section-red" style="background-image: url('./../img/work-place.jpg');">
+							<h4 class="card-section-title">Buy it for the first time</h4>
+							<p class="card-section-desc">New in store. Try it before anyone else.</p>
+						</a>
+
+					</div>
+					<!-- // col -->
+				</div>
+				<!-- // row -->
+			</div>
+
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <a class="m-0 text-center text-white">Copyright © Coworking 2024</a>
+    </div>
+</footer>
+		</main>
+
+
+
+	</body>
+</html>
+{% endblock %}
+
+

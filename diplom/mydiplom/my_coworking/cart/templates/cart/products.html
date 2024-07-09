@@ -1,0 +1,14 @@
+<form method="GET" action="{% url 'cart:search_products' %}">
+    <input type="text" name="q" placeholder="Поиск по названию">
+    <button type="submit">Найти</button>
+</form>
+
+{% if products %}
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Продукты не найдены.</p>
+{% endif %}
